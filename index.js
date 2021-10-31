@@ -3,9 +3,24 @@
 //Node Dependencies
 let http = require('http');
 
+// node dependencies to parse url
+let url = require('url');
+
 // server responds for all query string
 let httpserver = http.createServer(function (req, res) {
+    // get url and parse it
+    let url_parse = url.parse(req.url, true);
+
+    // get the path from the url
+    let path = url_parse.pathname;
+    let trim_path = path.replace(/^\/+|\/+$/g, '');
+
+    //send the response
     res.end('Hello World\n');
+
+
+    //log the request path
+    console.log("Request has been recieved on this path:" + trim_path);
 });
 
 // start the server and listen to port 30000
