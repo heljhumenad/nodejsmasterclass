@@ -15,12 +15,15 @@ let httpserver = http.createServer(function (req, res) {
     let path = url_parse.pathname;
     let trim_path = path.replace(/^\/+|\/+$/g, '');
 
+    //get the http-methods
+    let method = req.method.toUpperCase();
+
     //send the response
     res.end('Hello World\n');
 
 
     //log the request path
-    console.log("Request has been recieved on this path:" + trim_path);
+    console.log('Request has been recieved on this path:' + trim_path + 'with this method:' + method);
 });
 
 // start the server and listen to port 30000
