@@ -15,6 +15,9 @@ let httpserver = http.createServer(function (req, res) {
     let path = url_parse.pathname;
     let trim_path = path.replace(/^\/+|\/+$/g, '');
 
+    // get a query string as an object
+    let queryobject = url_parse.query;
+
     //get the http-methods
     let method = req.method.toUpperCase();
 
@@ -24,6 +27,7 @@ let httpserver = http.createServer(function (req, res) {
 
     //log the request path
     console.log('Request has been recieved on this path:' + trim_path + 'with this method:' + method);
+    console.log(queryobject);
 });
 
 // start the server and listen to port 30000
