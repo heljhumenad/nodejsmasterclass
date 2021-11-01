@@ -31,10 +31,15 @@ let httpserver = http.createServer(function (req, res) {
 
     //get the payload if any
     let stringDecoder = new stringdecoder('utf-8');
+    // create variable that will hold the stream of data
     let buffer = '';
+    
+    //create callback function to accept and append the stream of data from the http server
     req.on('data', function (data) {
         buffer += stringDecoder.write(data);
     });
+
+    //corelated all the stream of data if http server finish sending of stream of data
     req.on('end', function () {
         buffer += stringDecoder.end();
         //send the response
