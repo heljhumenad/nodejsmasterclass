@@ -5,6 +5,7 @@ let http = require('http');
 
 // node dependencies to parse url
 let url = require('url');
+let stringdecoder = require('string_decoder').StringDecoder;
 
 const port = 3000;
 
@@ -26,13 +27,23 @@ let httpserver = http.createServer(function (req, res) {
     //get the http-methods
     let method = req.method.toUpperCase();
 
-    //send the response
-    res.end('Hello World\n');
 
 
-    //log the request path
-    // console.log('Request has been recieved on this path:' + trim_path + ' with this method:' + method + ' query string parameters:', queryobject);
-    console.log('Request has recieved header with this content:', headers);
+    //get the payload if any
+    let stringDecoder = new stringdecoder('utf-8');
+    let buffer = '';
+    req.on('data', function (data) {
+        buffer += stringDecoder.write(data);
+    });
+    req.on('end', function () {
+        buffer += stringDecoder.end();
+        //send the response
+        res.end('Hello World\n');
+        //log the request path
+        // console.log('Request has been recieved on this path:' + trim_path + ' with this method:' + method + ' query string parameters:', queryobject);
+        console.log('Request has recieved header with this payload:', buffer);
+        console.log('type of:', typeof buffer)
+    })
 });
 
 // start the server and listen to port 30000
