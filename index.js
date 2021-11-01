@@ -68,7 +68,7 @@ let httpserver = http.createServer(function (req, res) {
             payload_string = JSON.stringify(payload);
 
             //return the response as json content type
-            res.setHeader('Content-Type','application/json');
+            res.setHeader('Content-Type', 'application/json');
             //return the response
             res.writeHead(statusCode);
             res.end(payload_string);
@@ -90,7 +90,7 @@ let handlers = {};
 //sample handler
 handlers.sample = function (data, callback) {
     //callback an http.status code payload should be a object
-    callback(406, { 'name': 'sample hanlder' });
+    callback(200, { 'name': 'sample hanlder' });
 };
 
 //not found handlers
@@ -99,6 +99,7 @@ handlers.notfound = function (data, callback) {
     callback(404);
 };
 //define a request router object
+// request router path
 let router = {
     'sample': handlers.sample
 };
