@@ -93,6 +93,14 @@ handlers.sample = function (data, callback) {
     callback(200, { 'name': 'sample hanlder' });
 };
 
+handlers.search = function (data, callback) {
+    callback(201,
+        {
+            'search': 'databuse',
+            'lost': 'mechanics'
+        })
+}
+
 //not found handlers
 handlers.notfound = function (data, callback) {
     //callback an http status 404 but doesn't need an payload
@@ -101,5 +109,6 @@ handlers.notfound = function (data, callback) {
 //define a request router object
 // request router path
 let router = {
-    'sample': handlers.sample
+    'sample': handlers.sample,
+    'search': handlers.search,
 };
