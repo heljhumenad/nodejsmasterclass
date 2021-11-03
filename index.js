@@ -2,10 +2,12 @@
 
 //Node Dependencies
 let http = require('http');
+let config = require('./config');
 
 // node dependencies to parse url
 let url = require('url');
 let stringdecoder = require('string_decoder').StringDecoder;
+//require the file
 
 const port = 3000;
 
@@ -80,8 +82,8 @@ let httpserver = http.createServer(function (req, res) {
 });
 
 // start the server and listen to port 30000
-httpserver.listen(port, function () {
-    console.log("The Server is listen on port " + port);
+httpserver.listen(config.port, function () {
+    console.log("The Server is listen on port " + config.port + " with env of " + config.env_name);
 });
 
 //define handlers
