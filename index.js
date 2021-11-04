@@ -2,7 +2,9 @@
 
 //Node Dependencies
 let http = require('http');
+let https = require('https');
 let config = require('./config');
+let fs = require('fs');
 
 // node dependencies to parse url
 let url = require('url');
@@ -13,6 +15,30 @@ const port = 3000;
 
 // server responds for all query string
 let httpserver = http.createServer(function (req, res) {
+    unified_server(req, res);
+});
+
+// start the server and listen to port that assign to http
+httpserver.listen(config.http_port, function () {
+    console.log("The Server is listen on port " + config.http_port);
+});
+
+//TODO : create the openssl key and cert file.
+let httpsServerOptions = {
+    // 'key': fs.readFileSync('./https/key.pem'),
+    //'cert': fs.readFileSync('./https/cert.pem')
+};
+
+//server responds for all query string to https
+let https_server = https.createServer(httpsServerOptions, function (req, res) {
+    unified_server(req, res);
+});
+// start the server and listen to port that assign to https
+https_server.listen(config.https_port, function () {
+    console.log("The Server is listen on port " + config.https_port);
+});
+
+let unified_server = function (req, res) {
     // get url and parse it
     let url_parse = url.parse(req.url, true);
 
@@ -79,12 +105,7 @@ let httpserver = http.createServer(function (req, res) {
 
         });
     });
-});
-
-// start the server and listen to port 30000
-httpserver.listen(config.port, function () {
-    console.log("The Server is listen on port " + config.port + " with env of " + config.env_name);
-});
+};
 
 //define handlers
 let handlers = {};

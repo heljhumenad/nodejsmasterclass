@@ -5,13 +5,15 @@ let env = {};
 
 // staging will be a default environment
 env.staging = {
-    'port': 3000,
+    'http_port': 3000,
+    'https_port': 3001,
     'env_name': 'staging'
 };
 
 //productions environment
 env.production = {
-    'port': 5000,
+    'http_port': 5000,
+    'https_port': 5001,
     'env_name': 'production'
 };
 
