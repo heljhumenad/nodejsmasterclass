@@ -123,7 +123,13 @@ handlers.search = function (data, callback) {
             'lost': 'mechanics'
         })
 }
-
+//initiate the ping response
+handlers.ping = function (data, callback) {
+    callback(200,
+        {
+            'message': 'The server is online'
+        })
+};
 //not found handlers
 handlers.notfound = function (data, callback) {
     //callback an http status 404 but doesn't need an payload
@@ -134,4 +140,5 @@ handlers.notfound = function (data, callback) {
 let router = {
     'sample': handlers.sample,
     'search': handlers.search,
+    'ping': handlers.ping
 };
