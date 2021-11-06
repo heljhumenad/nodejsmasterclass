@@ -4,15 +4,16 @@
 let http = require('http');
 let https = require('https');
 let config = require('./config');
-// let fs = require('fs');
+let fs = require('fs');
 let _data = require('./lib/data');
 
 //TESTING
 // you can manipulate and use the data object 
 // basic read, update, create, delete object file.
-_data.delete('test', 'new_file_format', function (err) {
-    console.log('This is an error occured', err);
+_data.create('test', 'new_file_format', { 'fizz': 'buzz' }, function (err, data) {
+    console.log('This is an error occured', err + 'save by the data:' + data);
 });
+
 // node dependencies to parse url
 let url = require('url');
 let stringdecoder = require('string_decoder').StringDecoder;
