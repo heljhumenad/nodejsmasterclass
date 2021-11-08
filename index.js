@@ -4,7 +4,6 @@
 let http = require('http');
 let https = require('https');
 let config = require('./config');
-let fs = require('fs');
 let _data = require('./lib/data');
 
 //TESTING
@@ -19,7 +18,6 @@ let url = require('url');
 let stringdecoder = require('string_decoder').StringDecoder;
 //require the file
 
-const port = 3000;
 
 // server responds for all query string
 let httpserver = http.createServer(function (req, res) {
