@@ -5,7 +5,7 @@ let http = require('http');
 let https = require('https');
 let config = require('./config');
 let _data = require('./lib/data');
-
+let handlers = require('./lib/handlers');
 //TESTING
 // you can manipulate and use the data object 
 // basic read, update, create, delete object file.
@@ -113,38 +113,12 @@ let unified_server = function (req, res) {
     });
 };
 
-//define handlers
-let handlers = {};
 
-//sample handler
-handlers.sample = function (data, callback) {
-    //callback an http.status code payload should be a object
-    callback(200, { 'name': 'sample hanlder' });
-};
-
-handlers.search = function (data, callback) {
-    callback(201,
-        {
-            'search': 'databuse',
-            'lost': 'mechanics'
-        })
-}
-//initiate the ping response
-handlers.ping = function (data, callback) {
-    callback(200,
-        {
-            'message': 'The server is online'
-        })
-};
-//not found handlers
-handlers.notfound = function (data, callback) {
-    //callback an http status 404 but doesn't need an payload
-    callback(404);
-};
 //define a request router object
 // request router path
 let router = {
     'sample': handlers.sample,
+    'users': handlers.users,
     'search': handlers.search,
     'ping': handlers.ping
 };

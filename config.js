@@ -7,14 +7,16 @@ let env = {};
 env.staging = {
     'http_port': 3000,
     'https_port': 3001,
-    'env_name': 'staging'
+    'env_name': 'staging',
+    'hashSecret': 'thisisasecret'
 };
 
 //productions environment
 env.production = {
     'http_port': 5000,
     'https_port': 5001,
-    'env_name': 'production'
+    'env_name': 'production',
+    'hashSecret': 'thisisasecret'
 };
 
 //determine which environment was passed to command-line arguments
