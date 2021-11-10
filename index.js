@@ -3,15 +3,16 @@
 //Node Dependencies
 let http = require('http');
 let https = require('https');
-let config = require('./config');
+let config = require('./lib/config');
 let _data = require('./lib/data');
 let handlers = require('./lib/handlers');
+let helpers = require('./lib/helpers');
 //TESTING
 // you can manipulate and use the data object 
 // basic read, update, create, delete object file.
-_data.create('test', 'new_file_format', { 'fizz': 'buzz' }, function (err, data) {
-    console.log('This is an error occured', err + 'save by the data:' + data);
-});
+// _data.create('test', 'new_file_format', { 'fizz': 'buzz' }, function (err, data) {
+//     console.log('This is an error occured', err + 'save by the data:' + data);
+// });
 
 // node dependencies to parse url
 let url = require('url');
@@ -78,15 +79,15 @@ let unified_server = function (req, res) {
         buffer += stringDecoder.end();
 
         //choose the handler this request should go. if not found call not found handler
-        let choosenHandler = typeof (router[trim_path]) !== 'undefined' ? router[trim_path] : handlers.notfound;
+        var choosenHandler = typeof (router[trim_path]) !== 'undefined' ? router[trim_path] : handlers.notfound;
 
         //construct the data object that will be send to the handler
-        let data = {
+        var data = {
             'trim_path': trim_path,
             'queryobject': queryobject,
             'method': method,
             'headers': headers,
-            'payload': buffer
+            'payload': helpers.parse_json_object(buffer)
         };
 
 
